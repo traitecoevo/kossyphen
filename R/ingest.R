@@ -48,13 +48,21 @@ process_year <- function(a, year) {
 #' @param sheets Named list mapping sheet basename -> season-start year. Defaults
 #'   to the twelve surveyed seasons (2017/18 was not surveyed).
 #' @param correctnames Basename of the name-fix table in `raw_dir`.
+#' @param ext File extension appended to sheet basenames if they lack one
+#'   (the KossyFlowers sheets are saved as `<name>.csv`).
 #' @return Tibble with columns species, date_fixed, days_after_1july, year.
 #' @export
 load_flowering_dates <- function(raw_dir,
                                   sheets = .kossy_sheets(),
-                                  correctnames = "WIF_correctnames.csv") {
-  rd <- function(f) readr::read_csv(file.path(raw_dir, f), col_names = FALSE,
-                                    show_col_types = FALSE)
+                                  correctnames = "WIF_correctnames.csv",
+                                  ext = ".csv") {
+  rd <- function(f) {
+    p <- file.path(raw_dir, f)
+    if (!file.exists(p) && nzchar(ext) && !grepl("\\.[A-Za-z0-9]+$", f)) {
+      p <- file.path(raw_dir, paste0(f, ext))
+    }
+    readr::read_csv(p, col_names = FALSE, show_col_types = FALSE)
+  }
 
   df <- do.call(dplyr::bind_rows, Map(function(sheet, yr) process_year(rd(sheet), yr),
                                       names(sheets), unlist(sheets)))
