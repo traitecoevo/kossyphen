@@ -1,0 +1,26 @@
+Package: kossyphen
+Title: Shared Methods for Kosciuszko Alpine Flowering Phenology
+Version: 0.1.0
+Authors@R:
+    person("Will", "Cornwell", email = "wcornwell@gmail.com", role = c("aut", "cre"))
+Description: Shared building blocks for analysing the Gibson & Green long-term
+    Kosciuszko flowering-walk dataset: raw walk-data ingestion, Australian Plant
+    Census name alignment, monthly-temperature loading, onset estimation (Weibull
+    limit and first-flower), and per-species temperature-sensitivity fitting.
+    Imported by both the observational ("What's in Flower") and the
+    experimental/observational synthesis (honours thesis) pipelines so the two
+    manuscripts share one method without sharing a pipeline.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Imports:
+    dplyr,
+    tidyr,
+    readr,
+    lubridate,
+    stringr,
+    rlang
+Suggests:
+    phest,
+    APCalign,
+    googledrive
+RoxygenNote: 7.3.1
