@@ -12,6 +12,9 @@ Description: Shared building blocks for analysing the Gibson & Green long-term
     manuscripts share one method without sharing a pipeline.
 License: MIT + file LICENSE
 Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Depends:
+    R (>= 4.1.0)
 Imports:
     dplyr,
     tidyr,
@@ -22,5 +25,7 @@ Imports:
 Suggests:
     phest,
     APCalign,
-    googledrive
-RoxygenNote: 7.3.1
+    googledrive,
+    testthat (>= 3.0.0)
+Config/roxygen2/version: 8.0.0
+Config/testthat/edition: 3
